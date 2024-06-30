@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: f7e258dcefcd
+Revision ID: f354fa1b0955
 Revises: 
-Create Date: 2024-06-30 10:45:49.977871
+Create Date: 2024-06-30 11:14:32.405785
 
 """
 from alembic import op
@@ -13,7 +13,7 @@ environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
 # revision identifiers, used by Alembic.
-revision = 'f7e258dcefcd'
+revision = 'f354fa1b0955'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -31,7 +31,7 @@ def upgrade():
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email'),
     sa.UniqueConstraint('username')
-    )
+    ) 
     op.create_table('products',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('owner_id', sa.Integer(), nullable=True),
@@ -86,15 +86,7 @@ def upgrade():
     sa.ForeignKeyConstraint(['product_id'], ['products.id'], ),
     sa.PrimaryKeyConstraint('order_id', 'product_id')
     )
-    op.create_table('shopping_cart_items',
-    sa.Column('user_id', sa.Integer(), nullable=False),
-    sa.Column('product_id', sa.Integer(), nullable=False),
-    sa.Column('quantity', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['product_id'], ['products.id'], ),
-    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('user_id', 'product_id')
-    )
-
+    
     if environment == "production":
         op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
     # ### end Alembic commands ###
