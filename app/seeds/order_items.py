@@ -2,18 +2,18 @@ from app.models import db, order_items, environment, SCHEMA
 from sqlalchemy.sql import text
 from ..models.order_items import order_item_association
 
-def seed_order_items():
+def seed_order_items(orders, products):
     order_items_values = [
-        {'order_id': 1, 'product_id': 7, 'quantity': 1},
-        {'order_id': 1, 'product_id': 8, 'quantity': 5},
-        {'order_id': 1, 'product_id': 9, 'quantity': 2},
-        {'order_id': 1, 'product_id': 10, 'quantity': 3},
-        {'order_id': 2, 'product_id': 1, 'quantity': 1},
-        {'order_id': 2, 'product_id': 2, 'quantity': 2},
-        {'order_id': 2, 'product_id': 3, 'quantity': 3},
-        {'order_id': 3, 'product_id': 4, 'quantity': 2},
-        {'order_id': 3, 'product_id': 5, 'quantity': 3},
-        {'order_id': 3, 'product_id': 6, 'quantity': 3},
+        {'order_id': orders[0].id, 'product_id': products[6].id, 'quantity': 1},
+        {'order_id': orders[0].id, 'product_id': products[7].id, 'quantity': 5},
+        {'order_id': orders[0].id, 'product_id': products[8].id, 'quantity': 2},
+        {'order_id': orders[0].id, 'product_id': products[9].id, 'quantity': 3},
+        {'order_id': orders[1].id, 'product_id': products[0].id, 'quantity': 1},
+        {'order_id': orders[1].id, 'product_id': products[1].id, 'quantity': 2},
+        {'order_id': orders[1].id, 'product_id': products[2].id, 'quantity': 3},
+        {'order_id': orders[2].id, 'product_id': products[3].id, 'quantity': 2},
+        {'order_id': orders[2].id, 'product_id': products[4].id, 'quantity': 3},
+        {'order_id': orders[2].id, 'product_id': products[5].id, 'quantity': 3},
     ]
 
     db.session.execute(order_item_association.insert(), order_items_values)

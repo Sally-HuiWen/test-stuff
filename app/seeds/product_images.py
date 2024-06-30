@@ -1,36 +1,36 @@
 from app.models import db, ProductImage, environment, SCHEMA
 from sqlalchemy.sql import text
 
-def seed_product_images():
+def seed_product_images(products):
     image1 = ProductImage(
-        product_id=1, url="image1"
+        product_id=products[0].id, url="image1"
     )
     image2 = ProductImage(
-        product_id=2, url="image2"
+        product_id=products[1].id, url="image2"
     )
     image3 = ProductImage(
-        product_id=3, url="image3"
+        product_id=products[2].id, url="image3"
     )
     image4 = ProductImage(
-        product_id=4, url="image4"
+        product_id=products[3].id, url="image4"
     )
     image5 = ProductImage(
-        product_id=5, url="image5"
+        product_id=products[4].id, url="image5"
     )
     image6 = ProductImage(
-        product_id=6, url="image6"
+        product_id=products[5].id, url="image6"
     )
     image7 = ProductImage(
-        product_id=7, url="image7"
+        product_id=products[6].id, url="image7"
     )
     image8 = ProductImage(
-        product_id=8, url="image8"
+        product_id=products[7].id, url="image8"
     )
     image9 = ProductImage(
-        product_id=9, url="image9"
+        product_id=products[8].id, url="image9"
     )
     image10 = ProductImage(
-        product_id=10, url="image10"
+        product_id=products[9].id, url="image10"
     )
 
     db.session.add(image1)
