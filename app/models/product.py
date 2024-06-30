@@ -1,6 +1,6 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from .review import reviews
-from .order_items import order_items
+from .order_items import order_item_association
 from .shopping_cart_item import shopping_cart_items
 
 class Product(db.Model):
@@ -47,7 +47,7 @@ class Product(db.Model):
                 #many-to-many orders<=order_items=>products
     order_products = db.relationship(
         'Order',
-        secondary=order_items,
+        secondary=order_item_association,
         back_populates = 'products_ordered'
     )
 
