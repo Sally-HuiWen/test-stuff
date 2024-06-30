@@ -1,6 +1,6 @@
 from app.models import db, order_items, environment, SCHEMA
 from sqlalchemy.sql import text
-from ..models.order_items import order_item_association
+from ..models.order_items import order_items
 
 def seed_order_items(orders, products):
     order_items_values = [
@@ -16,7 +16,7 @@ def seed_order_items(orders, products):
         {'order_id': orders[2].id, 'product_id': products[5].id, 'quantity': 3},
     ]
 
-    db.session.execute(order_item_association.insert(), order_items_values)
+    db.session.execute(order_items.insert(), order_items_values)
     db.session.commit()
 
 def undo_order_items():

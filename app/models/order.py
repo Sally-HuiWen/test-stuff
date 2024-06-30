@@ -1,5 +1,5 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
-from .order_items import order_item_association
+from .order_items import order_items
 
 
 class Order(db.Model):
@@ -24,6 +24,6 @@ class Order(db.Model):
     #many-to-many orders<=order_items=>products
     products_ordered = db.relationship(
         'Product',
-        secondary=order_item_association,
+        secondary=order_items,
         back_populates = 'order_products'
     )

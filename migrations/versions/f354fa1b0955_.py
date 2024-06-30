@@ -30,7 +30,7 @@ def upgrade():
     sa.Column('hashed_password', sa.String(length=255), nullable=False),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email'),
-    sa.UniqueConstraint('username')
+    sa.UniqueConstraint('username'),
     ) 
     op.create_table('products',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -41,14 +41,14 @@ def upgrade():
     sa.Column('price', sa.Numeric(), nullable=False),
     sa.Column('stock', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['owner_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('id')
+    sa.PrimaryKeyConstraint('id'),
     )
     op.create_table('product_images',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('product_id', sa.Integer(), nullable=True),
     sa.Column('url', sa.String(length=2000), nullable=False),
     sa.ForeignKeyConstraint(['product_id'], ['products.id'], ),
-    sa.PrimaryKeyConstraint('id')
+    sa.PrimaryKeyConstraint('id'),
     )
     op.create_table('reviews',
     sa.Column('product_id', sa.Integer(), nullable=False),
@@ -59,7 +59,7 @@ def upgrade():
     sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['product_id'], ['products.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('product_id', 'user_id')
+    sa.PrimaryKeyConstraint('product_id', 'user_id'),
     )
     op.create_table('shopping_cart_items',
     sa.Column('user_id', sa.Integer(), nullable=False),
@@ -67,7 +67,7 @@ def upgrade():
     sa.Column('quantity', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['product_id'], ['products.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('user_id', 'product_id')
+    sa.PrimaryKeyConstraint('user_id', 'product_id'),
     )
     op.create_table('orders',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -76,7 +76,7 @@ def upgrade():
     sa.Column('discount', sa.Numeric(), nullable=True),
     sa.Column('status', sa.String(length=25), nullable=False),
     sa.ForeignKeyConstraint(['purchaser_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('id')
+    sa.PrimaryKeyConstraint('id'),
     )
     op.create_table('order_items',
     sa.Column('order_id', sa.Integer(), nullable=False),
@@ -84,11 +84,12 @@ def upgrade():
     sa.Column('quantity', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['order_id'], ['orders.id'], ),
     sa.ForeignKeyConstraint(['product_id'], ['products.id'], ),
-    sa.PrimaryKeyConstraint('order_id', 'product_id')
+    sa.PrimaryKeyConstraint('order_id', 'product_id'),
     )
     
     if environment == "production":
         op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
+        
     # ### end Alembic commands ###
 
 
